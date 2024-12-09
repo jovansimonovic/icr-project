@@ -19,38 +19,27 @@
       >
         <mat-radio-button value="All">All</mat-radio-button>
         <br />
-        <mat-radio-button value="T-shirt">T-shirt</mat-radio-button>
+        <mat-radio-button value="Dog">Dogs</mat-radio-button>
         <br />
-        <mat-radio-button value="Shoes">Shoes</mat-radio-button>
+        <mat-radio-button value="Cat">Cats</mat-radio-button>
         <br />
-        <mat-radio-button value="Shorts">Shorts</mat-radio-button>
+        <mat-radio-button value="Bird">Birds</mat-radio-button>
+        <br />
+        <mat-radio-button value="Fish">Fish</mat-radio-button>
+        <br />
+        <mat-radio-button value="Rodent">Rodents</mat-radio-button>
       </mat-radio-group>
       <mat-divider class="pb-2"></mat-divider>
       <span class="text-xl font-bold">Sizes:</span>
       <ul>
         <li>
-          <mat-checkbox (change)="filterBySize('S')">S</mat-checkbox>
+          <mat-checkbox (change)="filterBySize('Small')">Small</mat-checkbox>
         </li>
         <li>
-          <mat-checkbox (change)="filterBySize('M')">M</mat-checkbox>
+          <mat-checkbox (change)="filterBySize('Medium')">Medium</mat-checkbox>
         </li>
         <li>
-          <mat-checkbox (change)="filterBySize('L')">L</mat-checkbox>
-        </li>
-        <li>
-          <mat-checkbox (change)="filterBySize('XL')">XL</mat-checkbox>
-        </li>
-        <li>
-          <mat-checkbox (change)="filterBySize('39')">39</mat-checkbox>
-        </li>
-        <li>
-          <mat-checkbox (change)="filterBySize('40')">40</mat-checkbox>
-        </li>
-        <li>
-          <mat-checkbox (change)="filterBySize('41')">41</mat-checkbox>
-        </li>
-        <li>
-          <mat-checkbox (change)="filterBySize('42')">42</mat-checkbox>
+          <mat-checkbox (change)="filterBySize('Large')">Large</mat-checkbox>
         </li>
       </ul>
       <mat-divider class="pb-2"></mat-divider>
