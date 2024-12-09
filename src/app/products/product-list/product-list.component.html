@@ -1,0 +1,124 @@
+<div class="my-20">
+  <div class="text-center">
+    <mat-form-field class="w-[350px]">
+      <input
+        type="text"
+        matInput
+        placeholder="Search by name"
+        (input)="doSearch($any($event.target).value)"
+      />
+    </mat-form-field>
+  </div>
+  <div class="flex">
+    <div class="ml-4">
+      <span class="text-xl font-bold">Categories:</span>
+      <br />
+      <mat-radio-group
+        [(ngModel)]="selectedCategory"
+        (change)="filterByCategory()"
+      >
+        <mat-radio-button value="All">All</mat-radio-button>
+        <br />
+        <mat-radio-button value="T-shirt">T-shirt</mat-radio-button>
+        <br />
+        <mat-radio-button value="Shoes">Shoes</mat-radio-button>
+        <br />
+        <mat-radio-button value="Shorts">Shorts</mat-radio-button>
+      </mat-radio-group>
+      <mat-divider class="pb-2"></mat-divider>
+      <span class="text-xl font-bold">Sizes:</span>
+      <ul>
+        <li>
+          <mat-checkbox (change)="filterBySize('S')">S</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox (change)="filterBySize('M')">M</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox (change)="filterBySize('L')">L</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox (change)="filterBySize('XL')">XL</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox (change)="filterBySize('39')">39</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox (change)="filterBySize('40')">40</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox (change)="filterBySize('41')">41</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox (change)="filterBySize('42')">42</mat-checkbox>
+        </li>
+      </ul>
+      <mat-divider class="pb-2"></mat-divider>
+      <span class="text-xl font-bold">Price:</span>
+      <br />
+      <div class="flex flex-col items-center">
+        <mat-form-field class="w-[150px]">
+          <input
+            type="number"
+            matInput
+            placeholder="Min Price"
+            [(ngModel)]="selectedPriceRange[0]"
+            (input)="filterByPrice()"
+          />
+        </mat-form-field>
+        <mat-form-field class="w-[150px]">
+          <input
+            type="number"
+            matInput
+            placeholder="Max Price"
+            [(ngModel)]="selectedPriceRange[1]"
+            (input)="filterByPrice()"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="flex flex-wrap justify-center items-center">
+      <div *ngFor="let product of paginatedProducts">
+        <mat-card class="w-[280px] m-4 hover:scale-105 duration-300">
+          <mat-card-header class="flex justify-center">
+            <mat-card-title>{{ product.name }}</mat-card-title>
+            <mat-card-subtitle class="text-center">{{
+              product.category
+            }}</mat-card-subtitle>
+          </mat-card-header>
+          <img
+            mat-card-image
+            [src]="product.image"
+            alt="Product image"
+            class="w-full h-[250px] object-cover cursor-pointer"
+            (click)="viewProductDetails(product.id)"
+          />
+          <mat-card-content class="text-center">
+            <p>
+              {{ product.description }}
+            </p>
+          </mat-card-content>
+          <mat-card-actions class="flex justify-between mx-4">
+            <span class="text-2xl">{{ product.price }}€</span>
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="addToCart(product)"
+            >
+              <mat-icon>add_shopping_cart</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-center mt-4">
+    <mat-paginator
+      [length]="totalProducts"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+      (page)="handlePageChange($event)"
+    >
+    </mat-paginator>
+  </div>
+</div>

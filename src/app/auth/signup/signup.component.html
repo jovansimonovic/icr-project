@@ -1,0 +1,148 @@
+<div class="h-dvh flex flex-col justify-center items-center">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="text-center">
+    <div>
+      <mat-form-field class="mx-1 w-[136px]">
+        <mat-label>First name</mat-label>
+        <input
+          type="text"
+          name="firstName"
+          matInput
+          required
+          ngModel
+          #firstName="ngModel"
+        />
+        <mat-error>Must be filled</mat-error>
+      </mat-form-field>
+      <mat-form-field class="mx-1 w-[206px]">
+        <mat-label>Last name</mat-label>
+        <input
+          type="text"
+          name="lastName"
+          matInput
+          required
+          ngModel
+          #lastName="ngModel"
+        />
+        <mat-error *ngIf="lastName.hasError('required')">
+          Must be filled
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field class="w-[350px]">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        name="email"
+        matInput
+        required
+        email
+        ngModel
+        #email="ngModel"
+      />
+      <mat-icon matIconSuffix>email</mat-icon>
+      <mat-error *ngIf="email.hasError('required')"> Must be filled </mat-error>
+      <mat-error *ngIf="email.hasError('email')">
+        This field should be in a valid email format
+      </mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="w-[350px]">
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        name="password"
+        matInput
+        required
+        ngModel
+        #password="ngModel"
+        minlength="8"
+      />
+      <mat-icon matIconSuffix>lock</mat-icon>
+      <mat-hint align="start"> Must be at least 8 characters long </mat-hint>
+      <mat-hint align="end">{{ password.value?.length }} / 8</mat-hint>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="w-[350px]">
+      <mat-label>Address</mat-label>
+      <input
+        type="text"
+        name="address"
+        matInput
+        required
+        ngModel
+        #address="ngModel"
+      />
+      <mat-icon matIconSuffix>home</mat-icon>
+      <mat-error *ngIf="address.hasError('required')">
+        Must be filled
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <mat-form-field class="mx-1 w-[171px]">
+        <mat-label>City</mat-label>
+        <input
+          type="text"
+          name="city"
+          matInput
+          required
+          ngModel
+          #city="ngModel"
+        />
+        <mat-icon matIconSuffix>location_on</mat-icon>
+        <mat-error *ngIf="city.hasError('required')">
+          Must be filled
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="mx-1 w-[171px]">
+        <mat-label>ZIP code</mat-label>
+        <input
+          type="number"
+          name="zipCode"
+          matInput
+          required
+          min="0"
+          class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          ngModel
+          #zipCode="ngModel"
+        />
+        <mat-icon matIconSuffix>pin</mat-icon>
+        <mat-error *ngIf="zipCode.hasError('required')">
+          Must be filled
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <mat-form-field class="w-[350px]">
+      <mat-label>Phone number</mat-label>
+      <span matTextPrefix>+381 &nbsp;</span>
+      <input
+        type="tel"
+        name="phoneNumber"
+        matInput
+        required
+        ngModel
+        #phoneNumber="ngModel"
+      />
+      <mat-icon matIconSuffix>phone</mat-icon>
+      <mat-error *ngIf="phoneNumber.hasError('required')">
+        Must be filled
+      </mat-error>
+    </mat-form-field>
+    <br />
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      class="my-3"
+      [disabled]="form.invalid"
+    >
+      Sign Up
+    </button>
+  </form>
+  <mat-error class="my-1 text-lg font-semibold" *ngIf="errorExists">
+    {{ errorText }}
+  </mat-error>
+  <div class="text-lg text-center">
+    Already have an account?
+    <a routerLink="/login" class="text-blue-600 font-bold">Log In</a>
+  </div>
+</div>

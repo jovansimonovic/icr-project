@@ -1,0 +1,114 @@
+<mat-sidenav-container class="h-dvh">
+  <!-- sidenav -->
+  <mat-sidenav #sidenav>
+    <mat-drawer-container class="w-48">
+      <mat-nav-list>
+        <ul>
+          <a mat-list-item routerLink="/" (click)="sidenav.close()">
+            <div class="flex gap-2">
+              <mat-icon>home</mat-icon>
+              Home
+            </div>
+          </a>
+          <a mat-list-item routerLink="product-list" (click)="sidenav.close()">
+            <div class="flex gap-2">
+              <mat-icon>grid_view</mat-icon>
+              Products
+            </div>
+          </a>
+          <a
+            *ngIf="isLoggedIn"
+            mat-list-item
+            routerLink="profile"
+            (click)="sidenav.close()"
+          >
+            <div class="flex gap-2">
+              <mat-icon>account_circle</mat-icon>
+              Profile
+            </div>
+          </a>
+          <a
+            *ngIf="!isLoggedIn"
+            mat-list-item
+            routerLink="login"
+            (click)="sidenav.close()"
+          >
+            <div class="flex gap-2">
+              <mat-icon>login</mat-icon>
+              Log In
+            </div>
+          </a>
+          <a
+            *ngIf="isLoggedIn"
+            mat-list-item
+            routerLink="login"
+            (click)="sidenav.close()"
+            (click)="logout()"
+          >
+            <div class="flex gap-2">
+              <mat-icon>logout</mat-icon>
+              Log Out
+            </div>
+          </a>
+        </ul>
+      </mat-nav-list>
+    </mat-drawer-container>
+  </mat-sidenav>
+
+  <!-- toolbar -->
+  <mat-sidenav-content>
+    <mat-toolbar color="white" class="flex justify-between fixed top-0 z-10">
+      <a routerLink="/" class="text-2xl">Nike Shop</a>
+      <div class="hidden sm:block">
+        <ul class="flex gap-2">
+          <li>
+            <button mat-button routerLink="/" class="nav-button">Home</button>
+          </li>
+          <li>
+            <button mat-button routerLink="product-list" class="nav-button">
+              Products
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="hidden sm:flex items-center gap-2">
+        <div>
+          <button mat-icon-button routerLink="cart">
+            <mat-icon [matBadge]="cartItemCount" matBadgeColor="warn"
+              >shopping_cart
+            </mat-icon>
+          </button>
+          <button *ngIf="isLoggedIn" mat-icon-button routerLink="profile">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+        </div>
+        <button
+          *ngIf="!isLoggedIn"
+          mat-raised-button
+          color="accent"
+          routerLink="login"
+        >
+          LOG IN
+        </button>
+        <button
+          *ngIf="isLoggedIn"
+          mat-raised-button
+          color="accent"
+          routerLink="login"
+          (click)="logout()"
+        >
+          LOG OUT
+        </button>
+      </div>
+      <div class="sm:hidden">
+        <button mat-icon-button routerLink="cart">
+          <mat-icon [matBadge]="cartItemCount" matBadgeColor="warn">shopping_cart</mat-icon>
+        </button>
+        <button mat-icon-button (click)="sidenav.open()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,146 @@
+<div class="h-dvh flex flex-col justify-center items-center my-4">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="text-center">
+    <div class="text-4xl mb-4">Edit profile</div>
+    <mat-form-field class="mx-1 w-[300px]">
+      <mat-label>First name</mat-label>
+      <input
+        type="text"
+        name="firstName"
+        matInput
+        required
+        ngModel
+        [(ngModel)]="this.currentUser.firstName"
+        #firstName="ngModel"
+      />
+      <mat-error>Must be filled</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="mx-1 w-[300px]">
+      <mat-label>Last name</mat-label>
+      <input
+        type="text"
+        name="lastName"
+        matInput
+        required
+        ngModel
+        [(ngModel)]="this.currentUser.lastName"
+        #lastName="ngModel"
+      />
+      <mat-error *ngIf="lastName.hasError('required')">
+        Must be filled
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-[300px]">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        name="email"
+        matInput
+        required
+        email
+        ngModel
+        [(ngModel)]="this.currentUser.email"
+        #email="ngModel"
+      />
+      <mat-icon matIconSuffix>email</mat-icon>
+      <mat-error *ngIf="email.hasError('required')"> Must be filled </mat-error>
+      <mat-error *ngIf="email.hasError('email')">
+        This field should be in a valid email format
+      </mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="w-[300px]">
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        name="password"
+        matInput
+        required
+        ngModel
+        [(ngModel)]="this.currentUser.password"
+        #password="ngModel"
+        minlength="8"
+      />
+      <mat-icon matIconSuffix>lock</mat-icon>
+      <mat-hint align="start"> Must be at least 8 characters long </mat-hint>
+      <mat-hint align="end">{{ password.value?.length }} / 8</mat-hint>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="w-[300px]">
+      <mat-label>Address</mat-label>
+      <input
+        type="text"
+        name="address"
+        matInput
+        required
+        ngModel
+        [(ngModel)]="this.currentUser.address"
+        #address="ngModel"
+      />
+      <mat-icon matIconSuffix>home</mat-icon>
+      <mat-error *ngIf="address.hasError('required')">
+        Must be filled
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="mx-1 w-[300px]">
+      <mat-label>City</mat-label>
+      <input
+        type="text"
+        name="city"
+        matInput
+        required
+        ngModel
+        [(ngModel)]="this.currentUser.city"
+        #city="ngModel"
+      />
+      <mat-icon matIconSuffix>location_on</mat-icon>
+      <mat-error *ngIf="city.hasError('required')"> Must be filled </mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="mx-1 w-[300px]">
+      <mat-label>ZIP code</mat-label>
+      <input
+        type="number"
+        name="zipCode"
+        matInput
+        required
+        min="0"
+        class="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+        ngModel
+        [(ngModel)]="this.currentUser.zipCode"
+        #zipCode="ngModel"
+      />
+      <mat-icon matIconSuffix>pin</mat-icon>
+      <mat-error *ngIf="zipCode.hasError('required')">
+        Must be filled
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-[300px]">
+      <mat-label>Phone number</mat-label>
+      <span matTextPrefix>+381 &nbsp;</span>
+      <input
+        type="tel"
+        name="phoneNumber"
+        matInput
+        required
+        ngModel
+        [(ngModel)]="this.currentUser.phoneNumber"
+        #phoneNumber="ngModel"
+      />
+      <mat-icon matIconSuffix>phone</mat-icon>
+      <mat-error *ngIf="phoneNumber.hasError('required')">
+        Must be filled
+      </mat-error>
+    </mat-form-field>
+    <br />
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="form.invalid"
+      (click)="closeDialog()"
+    >
+      SAVE CHANGES
+    </button>
+  </form>
+</div>

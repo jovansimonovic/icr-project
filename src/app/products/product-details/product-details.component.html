@@ -1,0 +1,33 @@
+<div
+  class="flex flex-col sm:flex-row sm:h-dvh sm:justify-center sm:items-center"
+>
+  <div class="mt-14 sm:mt-0">
+    <img
+      src="{{ product.image }}"
+      alt="product image"
+      class="w-full h-[500px] object-cover"
+    />
+  </div>
+  <div class="mx-4 sm:h-[500px] sm:flex sm:flex-col sm:justify-evenly">
+    <div class="text-3xl my-2">{{ product.name }}</div>
+    <div class="text-justify text-xl">{{ product.description }}</div>
+    <div class="text-xl mt-2">
+      Category:
+      {{ product.category }}
+    </div>
+    <div class="text-xl mt-2">
+      Size:
+      {{ product.size }}
+    </div>
+    <div class="text-xl mt-2">
+      Added date:
+      {{ product.addedDate }}
+    </div>
+    <div class="text-4xl mt-4">{{ product.price }}€</div>
+    <div class="text-center mt-8 sm:mt-0">
+      <button mat-raised-button color="accent" class="w-[80%]" (click)="addToCart(product)">
+        ADD TO CART
+      </button>
+    </div>
+  </div>
+</div>

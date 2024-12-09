@@ -1,0 +1,56 @@
+<div class="h-dvh flex flex-col justify-center items-center">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="text-center">
+    <mat-form-field class="w-[350px]">
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        name="email"
+        matInput
+        ngModel
+        required
+        email
+        #email="ngModel"
+      />
+      <mat-icon matIconSuffix>mail</mat-icon>
+      <mat-error *ngIf="email.hasError('required')">
+        This field should not be empty
+      </mat-error>
+      <mat-error *ngIf="email.hasError('email')">
+        This field should be in a valid email format
+      </mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="w-[350px]">
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        name="password"
+        required
+        matInput
+        ngModel
+        #password="ngModel"
+      />
+      <mat-icon matIconSuffix>lock</mat-icon>
+      <mat-error *ngIf="password.hasError('required')">
+        This field should not be empty
+      </mat-error>
+    </mat-form-field>
+    <br />
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      class="my-3"
+      [disabled]="form.invalid"
+    >
+      LOG IN
+    </button>
+    <mat-error class="my-1 text-lg font-semibold" *ngIf="errorExists">
+      {{ errorText }}
+    </mat-error>
+  </form>
+  <div class="text-lg">
+    Don't have an account?
+    <a routerLink="/signup" class="text-blue-600 font-bold">Sign Up</a>
+  </div>
+</div>

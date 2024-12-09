@@ -1,0 +1,73 @@
+<div class="text-4xl mt-20 text-center">Profile</div>
+<div class="flex flex-col justify-center items-center">
+  <div class="mt-10 w-[400px] text-lg bg-neutral-200 p-4 rounded-2xl">
+    <div>
+      <span class="text-blue-600">Name:</span> {{ user.firstName }}
+      {{ user.lastName }}
+    </div>
+    <div><span class="text-blue-600">Email:</span> {{ user.email }}</div>
+    <div><span class="text-blue-600">Address:</span> {{ user.address }}</div>
+    <div>
+      <span class="text-blue-600">ZIP code and city:</span>
+      {{ user.zipCode }} {{ user.city }}
+    </div>
+    <div>
+      <span class="text-blue-600">Phone number:</span>
+      +381 {{ user.phoneNumber }}
+    </div>
+  </div>
+  <button
+    mat-raised-button
+    color="accent"
+    class="mt-6 mb-10"
+    (click)="openDialog()"
+  >
+    EDIT PROFILE
+  </button>
+
+  <div class="flex flex-col items-center">
+    <span class="text-4xl mb-4">Orders</span>
+    <table
+      mat-table
+      [dataSource]="orders"
+      class="mat-elevation-z8"
+      *ngIf="orders.length > 0"
+    >
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let order">{{ order.id }}</td>
+      </ng-container>
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Created at</th>
+        <td mat-cell *matCellDef="let order">{{ order.createdAt }}</td>
+      </ng-container>
+      <ng-container matColumnDef="products">
+        <th mat-header-cell *matHeaderCellDef>Ordered products</th>
+        <td mat-cell *matCellDef="let order">
+          <ng-container *ngFor="let product of order.orderedProducts">
+            {{ product.quantity }} x {{ product.name }} ({{ product.size }})
+            <br />
+          </ng-container>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="totalPrice">
+        <th mat-header-cell *matHeaderCellDef>Total price</th>
+        <td mat-cell *matCellDef="let order">{{ order.totalPrice }}€</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <div class="flex flex-col mt-12" *ngIf="orders.length === 0">
+      <span class="text-2xl">You haven't made any orders yet</span>
+      <button
+        mat-raised-button
+        color="accent"
+        class="mt-4"
+        routerLink="/product-list"
+      >
+        GO BACK TO PRODUCT LIST
+      </button>
+    </div>
+  </div>
+</div>
