@@ -102,7 +102,13 @@
       </div>
       <div class="sm:hidden">
         <button mat-icon-button routerLink="cart">
-          <mat-icon [matBadge]="cartItemCount" matBadgeColor="warn">shopping_cart</mat-icon>
+          <mat-icon
+            [matBadge]="cartItemCount"
+            [matBadgeHidden]="cartItemCount === 0"
+            matBadgeColor="warn"
+          >
+            shopping_cart
+          </mat-icon>
         </button>
         <button mat-icon-button (click)="sidenav.open()">
           <mat-icon>menu</mat-icon>
