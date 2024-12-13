@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Product } from './product.service';
 import { UserService } from './user.service';
-
-export interface Order {
-  id: number;
-  createdAt: Date;
-  orderedProducts: Array<Product>;
-  totalPrice: number;
-  userId: number;
-}
+import { Product } from '../models/product.model';
+import { Order } from '../models/order.model';
 
 @Injectable({
   providedIn: 'root',

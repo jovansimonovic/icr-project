@@ -11,14 +11,14 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
-import { UserService } from './services/user.service';
+import { UserService } from '../services/user.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { CartComponent } from './cart/cart.component';
-import { ProductService } from './services/product.service';
-import { CartService } from './services/cart.service';
+import { ProductService } from '../services/product.service';
+import { CartService } from '../services/cart.service';
 import { EditComponent } from './user/edit/edit.component';
 import { MatRadioModule } from '@angular/material/radio';
 

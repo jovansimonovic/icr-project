@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from './product.service';
+import { Product } from '../models/product.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs';
 

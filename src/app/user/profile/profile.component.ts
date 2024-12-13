@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { User, UserService } from '../../services/user.service';
+import { User } from '../../../models/user.model';
+import { UserService } from '../../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditComponent } from '../edit/edit.component';
-import { Order, OrderService } from '../../services/order.service';
+import { Order } from '../../../models/order.model';
+import { OrderService } from '../../../services/order.service';
 
 @Component({
   selector: 'app-profile',

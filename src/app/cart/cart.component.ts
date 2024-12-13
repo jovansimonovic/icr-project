@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../services/cart.service';
-import { Product } from '../services/product.service';
+import { CartService } from '../../services/cart.service';
+import { Product } from '../../models/product.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { OrderService } from '../services/order.service';
-import { UserService } from '../services/user.service';
+import { OrderService } from '../../services/order.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-cart',

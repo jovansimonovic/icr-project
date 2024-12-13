@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-edit',
