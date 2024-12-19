@@ -21,6 +21,7 @@ import { ProductService } from '../services/product.service';
 import { CartService } from '../services/cart.service';
 import { EditComponent } from './user/edit/edit.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
+    HttpClientModule,
   ],
   providers: [
     provideAnimationsAsync(),
