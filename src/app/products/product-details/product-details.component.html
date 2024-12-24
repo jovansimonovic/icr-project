@@ -1,33 +1,75 @@
 <div
-  class="flex flex-col sm:flex-row sm:h-dvh sm:justify-center sm:items-center"
+  class="flex flex-col sm:h-dvh sm:justify-center sm:items-center"
 >
-  <div class="mt-14 sm:mt-0">
-    <img
-      src="{{ product.image }}"
-      alt="product image"
-      class="w-full h-[500px] object-cover"
-    />
+  <div class="flex flex-col md:flex-row">
+    <!-- product image -->
+    <div class="mt-14 sm:mt-0">
+      <img
+        src="{{ product.image }}"
+        alt="product image"
+        class="w-full h-[500px] object-cover"
+      />
+    </div>
+
+    <!-- product details -->
+    <div class="mx-4 sm:h-[500px] sm:flex sm:flex-col sm:justify-evenly">
+      <div class="text-3xl my-2">{{ product.name }}</div>
+      <div class="text-justify text-xl">{{ product.description }}</div>
+      <div class="text-xl mt-2">
+        Category:
+        {{ product.category }}
+      </div>
+      <div class="text-xl mt-2">
+        Size:
+        {{ product.size }}
+      </div>
+      <div class="text-xl mt-2">
+        Origin:
+        {{ product.origin }}
+      </div>
+      <div class="text-xl mt-2">
+        Age:
+        {{ product.age }}
+      </div>
+      <div class="text-4xl mt-4">{{ product.price }}€</div>
+      <div class="text-center mt-8 sm:mt-0">
+        <button
+          mat-raised-button
+          color="accent"
+          class="w-[80%]"
+          (click)="addToCart(product)"
+        >
+          ADD TO CART
+        </button>
+      </div>
+    </div>
   </div>
-  <div class="mx-4 sm:h-[500px] sm:flex sm:flex-col sm:justify-evenly">
-    <div class="text-3xl my-2">{{ product.name }}</div>
-    <div class="text-justify text-xl">{{ product.description }}</div>
-    <div class="text-xl mt-2">
-      Category:
-      {{ product.category }}
+
+  <!-- reviews -->
+  <div class="my-4 p-4 w-full max-w-[80%]">
+    <div class="text-2xl font-semibold">User Reviews</div>
+
+    <div *ngIf="product.reviews.length > 0; else noReviews">
+      <div
+        class="p-4 border-b border-gray-300"
+        *ngFor="let review of product.reviews"
+      >
+        <div class="font-bold text-base">{{ review.user }}</div>
+        <div class="flex items-center mt-1">
+          <mat-icon *ngFor="let star of [].constructor(review.rating)">
+            star
+          </mat-icon>
+          <mat-icon *ngFor="let emptyStar of [].constructor(5 - review.rating)">
+            star_border
+          </mat-icon>
+        </div>
+        <div class="italic mt-2">{{ review.comment }}</div>
+      </div>
     </div>
-    <div class="text-xl mt-2">
-      Size:
-      {{ product.size }}
-    </div>
-    <div class="text-xl mt-2">
-      Added date:
-      {{ product.addedDate }}
-    </div>
-    <div class="text-4xl mt-4">{{ product.price }}€</div>
-    <div class="text-center mt-8 sm:mt-0">
-      <button mat-raised-button color="accent" class="w-[80%]" (click)="addToCart(product)">
-        ADD TO CART
-      </button>
-    </div>
+
+    <!-- if no reviews -->
+    <ng-template #noReviews>
+      <div class="text-lg text-gray-500 mt-4">No reviews available</div>
+    </ng-template>
   </div>
 </div>
