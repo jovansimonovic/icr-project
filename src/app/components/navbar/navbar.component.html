@@ -127,7 +127,9 @@
         class="bg-white shadow-lg rounded-lg w-[300px] h-[400px] md:w-[350px] md:h-[450px] flex flex-col z-50"
       >
         <!-- header -->
-        <div class="bg-gray-100 flex justify-between items-center p-3 border-b text-lg">
+        <div
+          class="bg-gray-100 flex justify-between items-center p-3 border-b text-lg"
+        >
           <strong>Virtual Assistant</strong>
           <span class="text-2xl">
             <button
@@ -152,9 +154,8 @@
             <div *ngIf="message.type === 'bot'" class="flex justify-start">
               <div
                 class="bg-gray-300 text-gray-900 text-sm py-2 px-3 rounded-lg max-w-56 lg:max-w-64"
-              >
-                {{ message.text }}
-              </div>
+                [innerHTML]="message.text"
+              ></div>
             </div>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { CartService } from '../../../services/cart.service';
 import { MessageModel } from '../../../models/message.model';
 import { ChatbotService } from '../../../services/chatbot.service';
 import { RasaModel } from '../../../models/rasa.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
@@ -68,10 +69,7 @@ export class NavbarComponent implements OnInit {
       this.waitingForResponse = true;
     }
 
-    if (
-      message.type === 'bot' &&
-      message.text !== this.botThinkingPlaceholder
-    ) {
+    if (message.type === 'bot' && message.text != this.botThinkingPlaceholder) {
       // tries to find placeholder thinking message
       for (let msg of this.messages) {
         if (msg.type === 'bot' && msg.text === this.botThinkingPlaceholder) {
@@ -99,9 +97,8 @@ export class NavbarComponent implements OnInit {
       this.pushMessage({ type: 'user', text: trimmedInput });
       this.pushMessage({ type: 'bot', text: this.botThinkingPlaceholder });
 
-      this.chatbotService
-        .getRasaMessage(trimmedInput)
-        .subscribe((response: RasaModel[]) => {
+      this.chatbotService.getRasaMessage(trimmedInput).subscribe(
+        (response: RasaModel[]) => {
           if (response.length === 0) {
             this.pushMessage({
               type: 'bot',
@@ -109,7 +106,29 @@ export class NavbarComponent implements OnInit {
             });
             return;
           }
-        });
+          response
+            .map((message) => {
+              if (message.image) {
+                return `<img src="${message.image}" width=200 />`;
+              }
+
+              if (message.attachment) {
+                return 'attachment';
+              }
+
+              return message.text;
+            })
+            .forEach((message) => {
+              this.pushMessage({ type: 'bot', text: message! });
+            });
+        },
+        (error: HttpErrorResponse) => {
+          this.pushMessage({
+            type: 'bot',
+            text: 'Sorry, I am not available at the moment.',
+          });
+        }
+      );
     }
   }
 
