@@ -74,7 +74,10 @@
       <div class="hidden sm:flex items-center gap-2">
         <div>
           <button mat-icon-button routerLink="cart">
-            <mat-icon [matBadge]="cartItemCount" matBadgeColor="warn"
+            <mat-icon
+              [matBadge]="cartItemCount"
+              matBadgeColor="warn"
+              [matBadgeHidden]="cartItemCount === 0"
               >shopping_cart
             </mat-icon>
           </button>
