@@ -14,7 +14,15 @@ import { UserService } from '../../services/user.service';
 export class CartComponent implements OnInit {
   cartItems: Product[] = [];
 
-  displayedColumns = ['name', 'image', 'size', 'price', 'options'];
+  displayedColumns = [
+    'name',
+    'image',
+    'category',
+    'size',
+    'origin',
+    'price',
+    'options',
+  ];
 
   constructor(
     private cartService: CartService,

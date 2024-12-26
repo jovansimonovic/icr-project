@@ -7,7 +7,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  private static cart: Product[] = JSON.parse(localStorage.getItem('cart') || '[]');
+  private static cart: Product[] = JSON.parse(
+    localStorage.getItem('cart') || '[]'
+  );
 
   private cartItemsSubject = new BehaviorSubject<Product[]>(CartService.cart);
   cartItems$ = this.cartItemsSubject.asObservable();
@@ -23,7 +25,9 @@ export class CartService {
 
   // adds item to cart
   addToCart(product: Product) {
-    const productIndex = CartService.cart.findIndex((item) => item.id === product.id);
+    const productIndex = CartService.cart.findIndex(
+      (item) => item.id === product.id
+    );
 
     if (productIndex === -1) {
       product.quantity = 1;
