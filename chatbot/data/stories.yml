@@ -28,3 +28,10 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+# here you define an example of a conversation
+# between the user and the bot for training purposes
+- story: test bot
+  steps:
+  - intent: bot_test
+  - action: utter_test

@@ -1,5 +1,6 @@
 version: "3.1"
 
+# intent must be defined here in order for it to work
 intents:
   - greet
   - goodbye
@@ -8,6 +9,7 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - bot_test
 
 responses:
   utter_greet:
@@ -28,6 +30,11 @@ responses:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+
+  # here you write a the bot's
+  # response for the specified intent
+  utter_test:
+  - text: "testing the bot functionality"
 
 session_config:
   session_expiration_time: 60
