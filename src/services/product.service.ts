@@ -224,12 +224,12 @@ export class ProductService {
     },
     {
       id: 8,
-      name: 'Jack',
+      name: 'Border Collie',
       description:
         'Loyal Border Collie with high intelligence. Excels in agility and herding activities.',
       category: 'Dog',
       image:
-        'https://cdn-ilefn.nitrocdn.com/GznEWgmOZdXrpQWjZBLaPHGeFRrtkXsP/assets/images/optimized/rev-489ee06/www.knose.com.au/wp-content/uploads/2023/08/section-img3-v2.webp',
+        'https://rasepasa.rs/wp-content/uploads/2023/10/border-koli-pas.jpg',
       price: 550,
       age: '1.5 years',
       origin: 'United Kingdom',
@@ -414,7 +414,7 @@ export class ProductService {
   ];
 
   // returns all products
-  getAllProducts() {
+  getAllProducts(): Product[] {
     return ProductService.dummyProductList;
   }
 

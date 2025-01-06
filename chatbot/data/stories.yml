@@ -35,3 +35,8 @@ stories:
   steps:
   - intent: bot_test
   - action: utter_test
+
+- story: show all products
+  steps:
+  - intent: show_all_products
+  - action: action_show_products

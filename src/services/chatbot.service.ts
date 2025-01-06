@@ -28,7 +28,7 @@ export class ChatbotService {
     return localStorage.getItem('session');
   }
 
-  // rasa chat bot response API
+  // rasa chatbot response API
   public getRasaMessage(userMessage: string) {
     const url = 'http://localhost:5005/webhooks/rest/webhook';
     return this.client.post<RasaModel[]>(

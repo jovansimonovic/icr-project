@@ -6,22 +6,34 @@
 
 
 # This is a simple example for a custom action which utters "Hello World!"
+import json
+from pathlib import Path
+from typing import Any, Text, Dict, List
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
 
-# from typing import Any, Text, Dict, List
-#
-# from rasa_sdk import Action, Tracker
-# from rasa_sdk.executor import CollectingDispatcher
-#
-#
-# class ActionHelloWorld(Action):
-#
-#     def name(self) -> Text:
-#         return "action_hello_world"
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#
-#         dispatcher.utter_message(text="Hello World!")
-#
-#         return []
+class ActionShowProducts(Action):
+
+  def name(self) -> Text:
+    return "action_show_products"
+
+  def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        # load product data from the JSON file
+        products_file = Path("data/products.json")
+        products = json.loads(products_file.read_text())
+
+        dispatcher.utter_message(text="Here's a list of all the pets", attachment=products)
+
+# generates an attachment message
+def generate_attachment(products, dispatcher, message):
+      data = products
+      if (isinstance(list) and len(data)>0):
+            dispatcher.utter_message(text=message, attachment=data)
+            return[]
+      
+      dispatcher.utter_message(text="We failed to find any pets")

@@ -5,6 +5,7 @@ import { MessageModel } from '../../../models/message.model';
 import { ChatbotService } from '../../../services/chatbot.service';
 import { RasaModel } from '../../../models/rasa.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-navbar',
@@ -28,7 +29,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private userService: UserService,
     private cartService: CartService,
-    private chatbotService: ChatbotService
+    private chatbotService: ChatbotService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -69,17 +71,24 @@ export class NavbarComponent implements OnInit {
       this.waitingForResponse = true;
     }
 
-    if (message.type === 'bot' && message.text != this.botThinkingPlaceholder) {
+    if (
+      message.type === 'bot' &&
+      message.text !== this.botThinkingPlaceholder
+    ) {
       // tries to find placeholder thinking message
-      for (let msg of this.messages) {
-        if (msg.type === 'bot' && msg.text === this.botThinkingPlaceholder) {
-          msg.text = message.text;
-          this.waitingForResponse = false;
-          return;
-        }
+      const placeholderIndex = this.messages.findIndex(
+        (msg) => msg.type === 'bot' && msg.text === this.botThinkingPlaceholder
+      );
+
+      if (placeholderIndex !== -1) {
+        this.messages[placeholderIndex].text = message.text;
+        this.waitingForResponse = false;
+        localStorage.setItem('messages', JSON.stringify(this.messages));
+        return;
       }
     }
 
+    // if not replacing the placeholder, just push the message
     this.messages.push(message);
 
     // saves messages in local storage
@@ -106,6 +115,7 @@ export class NavbarComponent implements OnInit {
             });
             return;
           }
+
           response
             .map((message) => {
               if (message.image) {
@@ -113,9 +123,48 @@ export class NavbarComponent implements OnInit {
               }
 
               if (message.attachment) {
-                return 'attachment';
-              }
+                let html = '';
 
+                for (let product of message.attachment) {
+                  html += `
+                <div class="relative flex flex-col bg-white rounded-lg w-full">
+                  <div class="px-2 py-1">
+                    <span class="text-slate-800 text-xl font-semibold">
+                      ${product.name}
+                    </span>
+                  </div>
+                  <div class="relative overflow-hidden bg-clip-border">
+                    <img src="${product.image}" alt="${product.name}" class="w-full object-cover rounded-md" />
+                  </div>
+                  <div class="p-2">
+                    <div class="mb-2 flex flex-col">
+                      <span class="text-slate-800 font-semibold">
+                        Species: ${product.category}
+                      </span>
+                      <span class="text-slate-800 font-semibold">
+                        Size: ${product.size}
+                      </span>
+                      <span class="text-slate-800 font-semibold">
+                        Origin: ${product.origin}
+                      </span>
+                    </div>
+                    <p class="text-slate-600 text-justify">
+                      ${product.description}
+                    </p>
+                    <div class="flex justify-between items-center">
+                      <span class="text-slate-800 text-xl font-semibold">
+                        ${product.price}€
+                      </span>
+                      <a href="/product-list/${product.id}" class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-md">
+                        <i class="fa-solid fa-circle-info"></i> Details
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                `;
+                }
+                return html;
+              }
               return message.text;
             })
             .forEach((message) => {

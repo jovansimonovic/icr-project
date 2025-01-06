@@ -95,3 +95,9 @@ nlu:
 - intent: bot_test
   examples: |
     - test
+
+- intent: show_all_products
+  examples: |
+    - show all pets
+    - give me a list of all pets
+    - what pets do you have?

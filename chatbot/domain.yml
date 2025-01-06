@@ -10,6 +10,13 @@ intents:
   - mood_unhappy
   - bot_challenge
   - bot_test
+  - show_all_products
+
+actions:
+  - action_show_products
+
+entities:
+  - product
 
 responses:
   utter_greet:
