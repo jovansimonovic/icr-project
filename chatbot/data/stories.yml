@@ -31,12 +31,47 @@ stories:
 
 # here you define an example of a conversation
 # between the user and the bot for training purposes
-- story: test bot
-  steps:
-  - intent: bot_test
-  - action: utter_test
-
 - story: show all products
   steps:
   - intent: show_all_products
   - action: action_show_products
+
+- story: search products by name
+  steps:
+  - intent: search_by_name
+  - action: action_search_by_name
+
+- story: search products by category
+  steps:
+  - intent: search_by_category
+  - action: action_search_by_category
+
+- story: search products cheaper than specified price
+  steps:
+  - intent: search_cheaper_than
+  - action: action_search_cheaper_than
+
+- story: search products pricier than specified price
+  steps:
+  - intent: search_pricier_than
+  - action: action_search_pricier_than
+
+- story: search products within price range
+  steps:
+  - intent: search_within_price_range
+  - action: action_search_within_price_range
+
+- story: search products by age
+  steps:
+  - intent: search_by_age
+  - action: action_search_by_age
+
+- story: search products by origin
+  steps:
+  - intent: search_by_origin
+  - action: action_search_by_origin
+
+- story: search products by size
+  steps:
+  - intent: search_by_size
+  - action: action_search_by_size

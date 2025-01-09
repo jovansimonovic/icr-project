@@ -11,12 +11,80 @@ intents:
   - bot_challenge
   - bot_test
   - show_all_products
+  - search_by_name
+  - search_by_category
+  - search_cheaper_than
+  - search_pricier_than
+  - search_within_price_range
+  - search_by_age
+  - search_by_origin
+  - search_by_size
+  - search_for_product
+
+entities:
+  - name
+  - category
+  - price
+  - price_min
+  - price_max
+  - age
+  - origin
+  - size
+
+slots:
+  name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: name
+  category:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: category
+  price:
+    type: float
+    mappings:
+      - type: from_entity
+        entity: price
+  price_min:
+    type: float
+    mappings:
+      - type: from_entity
+        entity: price_min
+  price_max:
+    type: float
+    mappings:
+      - type: from_entity
+        entity: price_max
+  age:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: age
+  origin:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: origin
+  size:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: size
 
 actions:
   - action_show_products
-
-entities:
-  - product
+  - action_search_products
+  - action_search_by_name
+  - action_search_by_category
+  - action_search_by_price
+  - action_search_cheaper_than
+  - action_search_pricier_than
+  - action_search_within_price_range
+  - action_search_by_age
+  - action_search_by_origin
+  - action_search_by_size
 
 responses:
   utter_greet:
@@ -40,8 +108,6 @@ responses:
 
   # here you write a the bot's
   # response for the specified intent
-  utter_test:
-  - text: "testing the bot functionality"
 
 session_config:
   session_expiration_time: 60

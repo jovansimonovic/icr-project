@@ -92,12 +92,203 @@ nlu:
 
 # here you write the name of the intent
 # and which words or sentences trigger it
-- intent: bot_test
-  examples: |
-    - test
-
 - intent: show_all_products
   examples: |
-    - show all pets
+    - show me all pets
     - give me a list of all pets
     - what pets do you have?
+    - what pets do you sell?
+
+- intent: search_by_name
+  examples: |
+    - search for [Labrador Retriever](name).
+    - show me a [Labrador Retriever](name).
+    - find [Labrador Retriever](name).
+    - do you have [Labrador Retriever](name)?
+    - search for [Jenday Conure](name).
+    - show me a [Jenday Conure](name).
+    - find [Jenday Conure](name).
+    - do you have [Jenday Conure](name)?
+    - search for [Clownfish](name).
+    - show me a [Clownfish](name).
+    - find [Clownfish](name).
+    - do you have [Clownfish](name)?
+    - search for [German Shepherd](name).
+    - show me a [German Shepherd](name).
+    - find [German Shepherd](name).
+    - do you have [German Shepherd](name)?
+    - search for [Siamese](name).
+    - show me a [Siamese](name).
+    - find [Siamese](name).
+    - do you have [Siamese](name)?
+    - search for [Goldfish](name).
+    - show me a [Goldfish](name).
+    - find [Goldfish](name).
+    - do you have [Goldfish](name)?
+    - search for [Beagle](name).
+    - show me a [Beagle](name).
+    - find [Beagle](name).
+    - do you have [Beagle](name)?
+    - search for [Persian](name).
+    - show me a [Persian](name).
+    - find [Persian](name).
+    - do you have [Persian](name)?
+    - search for [Border Collie](name).
+    - show me a [Border Collie](name).
+    - find [Border Collie](name).
+    - do you have [Border Collie](name)?
+    - search for [Golden Retriever](name).
+    - show me a [Golden Retriever](name).
+    - find [Golden Retriever](name).
+    - do you have [Golden Retriever](name)?
+    - search for [Maine Coon](name).
+    - show me a [Maine Coon](name).
+    - find [Maine Coon](name).
+    - do you have [Maine Coon](name)?
+    - search for [Doberman](name).
+    - show me a [Doberman](name).
+    - find [Doberman](name).
+    - do you have [Doberman](name)?
+    - search for [Guinea Pig](name).
+    - show me a [Guinea Pig](name).
+    - find [Guinea Pig](name).
+    - do you have [Guinea Pig](name)?
+    - search for [Cockatiel](name).
+    - show me a [Cockatiel](name).
+    - find [Cockatiel](name).
+    - do you have [Cockatiel](name)?
+    - search for [Scottish Fold](name).
+    - show me a [Scottish Fold](name).
+    - find [Scottish Fold](name).
+    - do you have [Scottish Fold](name)?
+
+- intent: search_by_category
+  examples: |
+    - search for [Cat](category).
+    - show me all [Cat](category).
+    - find [cat](category).
+    - do you have [cat](category)?
+    - search for [Dog](category).
+    - show me all [Dog](category).
+    - find [dog](category).
+    - do you have [dog](category)?
+    - search for [Bird](category).
+    - show me all [Bird](category).
+    - find [bird](category).
+    - do you have [bird](category)?
+    - search for [Fish](category).
+    - show me all [Fish](category).
+    - find [fish](category).
+    - do you have [fish](category)?
+    - search for [Rodent](category).
+    - show me all [Rodent](category).
+    - find [rodent](category).
+    - do you have [rodent](category)?
+
+- intent: search_cheaper_than
+  examples: |
+    - search for pets cheaper than [50](price) euros.
+    - search for pets that are cheaper than [100](price) euros.
+    - show me pets that are cheaper than [200](price) euros.
+    - find pets cheaper than [350](price) euros.
+    - find pets that are cheaper than [450](price) euros.
+    - do you sell pets that cost less than [600](price) euros?
+    - do you have pets cheaper than [850](price) euros?
+    - do you have pets that are cheaper than [1000](price) euros?
+
+- intent: search_pricier_than
+  examples: |
+    - search for pets pricier than [50](price) euros.
+    - search for pets that are pricier than [100](price) euros.
+    - show me pets that are pricier than [200](price) euros.
+    - find pets pricier than [350](price) euros.
+    - find pets that are pricier than [450](price) euros.
+    - dou you sell pets that cost more than [600](price) euros?
+    - do you have pets pricier than [850](price) euros?
+    - do you have pets that are pricier than [1000](price) euros?
+
+- intent: search_within_price_range
+  examples: |
+    - search for pets that cost between [50](price_min) and [200](price_max) euros.
+    - show me pets priced between [100](price_min) and [300](price_max) euros.
+    - find pets that are between [200](price_min) and [400](price_max) euros.
+    - do you have pets that cost between [150](price_min) and [350](price_max) euros?
+    - show me pets within the price range of [300](price_min) to [600](price_max) euros.
+    - search for pets in the price range of [50](price_min) to [100](price_max) euros.
+    - find pets that cost from [400](price_min) to [700](price_max) euros.
+    - are there pets available for a price between [250](price_min) and [500](price_max) euros?
+    - can I see pets that are priced from [100](price_min) to [150](price_max) euros?
+    - list pets within the range of [200](price_min) to [800](price_max) euros.
+    - search for pets that cost between [100](price_min) and [500](price_max) euros.
+    - show me pets in the range of [200](price_min) to [800](price_max).
+    - are there pets available from [50](price_min) to [300](price_max) euros?
+    - list pets priced within [400](price_min) and [1000](price_max).
+    - do you have pets that cost from [150](price_min) up to [350](price_max)?
+    - pets costing [50](price_min) to [200](price_max) euros, please.
+    - find pets priced [300](price_min) - [600](price_max).
+
+- intent: search_by_origin
+  examples: |
+    - search for pets from [Australia](origin).
+    - show me pets from [Australia](origin).
+    - find pets from [Australia](origin).
+    - do you have pets from [Australia](origin)?
+    - search for pets from [Brazil](origin).
+    - show me pets from [Brazil](origin).
+    - find pets from [Brazil](origin).
+    - do you have pets from [Brazil](origin)?
+    - search for pets from [Canada](origin).
+    - show me pets from [Canada](origin).
+    - find pets from [Canada](origin).
+    - do you have pets from [Canada](origin)?
+    - search for pets from [China](origin).
+    - show me pets from [China](origin).
+    - find pets from [China](origin).
+    - do you have pets from [China](origin)?
+    - search for pets from [Germany](origin).
+    - show me pets from [Germany](origin).
+    - find pets from [Germany](origin).
+    - do you have pets from [Germany](origin)?
+    - search for pets from [Iran](origin).
+    - show me pets from [Iran](origin).
+    - find pets from [Iran](origin).
+    - do you have pets from [Iran](origin)?
+    - search for pets from [Peru](origin).
+    - show me pets from [Peru](origin).
+    - find pets from [Peru](origin).
+    - do you have pets from [Peru](origin)?
+    - search for pets from [Scotland](origin).
+    - show me pets from [Scotland](origin).
+    - find pets from [Scotland](origin).
+    - do you have pets from [Scotland](origin)?
+    - search for pets from [Serbia](origin).
+    - show me pets from [Serbia](origin).
+    - find pets from [Serbia](origin).
+    - do you have pets from [Serbia](origin)?
+    - search for pets from [Thailand](origin).
+    - show me pets from [Thailand](origin).
+    - find pets from [Thailand](origin).
+    - do you have pets from [Thailand](origin)?
+    - search for pets from [United Kingdom](origin).
+    - show me pets from [United Kingdom](origin).
+    - find pets from [United Kingdom](origin).
+    - do you have pets from [United Kingdom](origin)?
+    - search for pets from [United States](origin).
+    - show me pets from [United States](origin).
+    - find pets from [United States](origin).
+    - do you have pets from [United States](origin)?
+
+- intent: search_by_size
+  examples: |
+    - search for pets that are [Small](size).
+    - show me pets that are [Small](size).
+    - find pets that are [small](size).
+    - do you have pets that are [small](size)?
+    - search for pets that are [Medium](size).
+    - show me pets that are [Medium](size).
+    - find pets that are [medium](size).
+    - do you have pets that are [medium](size)?
+    - search for pets that are [Large](size).
+    - show me pets that are [Large](size).
+    - find pets that are [large](size).
+    - do you have pets that are [large](size)?
