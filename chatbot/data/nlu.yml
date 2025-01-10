@@ -227,6 +227,18 @@ nlu:
     - pets costing [50](price_min) to [200](price_max) euros, please.
     - find pets priced [300](price_min) - [600](price_max).
 
+- intent: search_by_age
+  examples: |
+    - show me pets that are [2 years](age) old.
+    - do you have any pets that are [1 year](age) old?
+    - find pets that are [3 years](age) old.
+    - are there any pets that are [1.5 years](age) old?
+    - find me pets with an age of [2 years](age).
+    - i'm looking for a pet that is [6 months](age) old.
+    - show all pets aged [4 months](age).
+    - do you have pets that are [8.5 months](age) old?
+    - do you sell pets that are [1 month](age) old?
+
 - intent: search_by_origin
   examples: |
     - search for pets from [Australia](origin).

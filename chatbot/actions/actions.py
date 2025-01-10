@@ -12,6 +12,7 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
+import re
 
 # shows the list of all products
 class ActionShowProducts(Action):
@@ -208,10 +209,41 @@ class ActionSearchWithinPriceRange(Action):
         return [SlotSet("price_min", None), SlotSet("price_max", None)]
 
 # shows the products that match the age
-# todo: develop this
 class ActionSearchByAge(Action):
     def name(self) -> Text:
         return "action_search_by_age"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # load product data from the JSON file
+        try:
+            pets = load_data();
+        except:
+            dispatcher.utter_message(text="There was an error loading the data. Please try again.")
+  
+        # get age from search query
+        age = tracker.get_slot("age")
+
+        if not age:
+            dispatcher.utter_message(text="Please provide an age to search for")
+            return [SlotSet("age", None)]
+        
+        valid_age_pattern = r"^^\d+(\.\d+)? (year|years|month|months)$"
+
+        if not re.match(valid_age_pattern, age.lower()):
+            dispatcher.utter_message(text="Please provide the age in a format '[number] years' or '[number] months'")
+            return [SlotSet("age", None)]
+
+        matching_pets = [pet for pet in pets if pet["age"] == age.lower()]
+
+        if matching_pets:
+            dispatcher.utter_message(text=f"Here's a list of pets that are {age} old:", attachment=matching_pets)
+
+        return [SlotSet("age", None)]
 
 # shows the products that match the origin
 class ActionSearchByOrigin(Action):
