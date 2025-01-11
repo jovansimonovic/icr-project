@@ -75,3 +75,8 @@ stories:
   steps:
   - intent: search_by_size
   - action: action_search_by_size
+
+- story: search products by multiple criteria
+  steps:
+  - intent: search_by_multiple_criteria
+  - action: action_search_by_multiple_criteria

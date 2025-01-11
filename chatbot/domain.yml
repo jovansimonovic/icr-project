@@ -19,7 +19,7 @@ intents:
   - search_by_age
   - search_by_origin
   - search_by_size
-  - search_for_product
+  - search_by_multiple_criteria
 
 entities:
   - name
@@ -85,6 +85,7 @@ actions:
   - action_search_by_age
   - action_search_by_origin
   - action_search_by_size
+  - action_search_by_multiple_criteria
 
 responses:
   utter_greet:

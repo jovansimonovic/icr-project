@@ -53,7 +53,7 @@ class ActionSearchByName(Action):
         name = tracker.get_slot("name")
 
         if not name:
-            dispatcher.utter_message(text="Please provide a name to search for")
+            dispatcher.utter_message(text="Please provide a name to search for.")
             return []
         
         # remove the trailing "s" or "es" from the name (if applicable)
@@ -64,7 +64,7 @@ class ActionSearchByName(Action):
         if matching_pets:
             dispatcher.utter_message(text=f"Here are the results for {name}:", attachment=matching_pets)
         else:
-            dispatcher.utter_message(text=f"We have no pets with the name {name}")
+            dispatcher.utter_message(text=f"We have no pets with the name {name}.")
 
         return [SlotSet("name", None)]
 
@@ -90,7 +90,7 @@ class ActionSearchByCategory(Action):
         category = tracker.get_slot("category")
 
         if not category:
-            dispatcher.utter_message(text="Please provide a category to search for")
+            dispatcher.utter_message(text="Please provide a category to search for.")
             return []
         
         category_singular = category[:-1] if category.endswith("s") else category
@@ -100,7 +100,7 @@ class ActionSearchByCategory(Action):
         if matching_pets:
             dispatcher.utter_message(text=f"Here are the results for {category}:", attachment=matching_pets)
         else:
-            dispatcher.utter_message(text=f"We have no pets in the category {category}")
+            dispatcher.utter_message(text=f"We have no pets in the category {category}.")
 
         return [SlotSet("category", None)]
 
@@ -125,7 +125,7 @@ class ActionSearchCheaperThan(Action):
         price = tracker.get_slot("price")
 
         if not price:
-            dispatcher.utter_message(text="Please provide a price to search for")
+            dispatcher.utter_message(text="Please provide a price to search for.")
             return []
         
         matching_pets = [pet for pet in pets if pet["price"] <= int(price)]
@@ -133,7 +133,7 @@ class ActionSearchCheaperThan(Action):
         if matching_pets:
             dispatcher.utter_message(text=f"Here's a list of pets that cost less than or exactly {price}€:", attachment=matching_pets)
         else:
-            dispatcher.utter_message(text=f"We have no pets that cost less than {price}€")
+            dispatcher.utter_message(text=f"We have no pets that cost less than {price}€.")
 
         return [SlotSet("price", None)]
 
@@ -158,7 +158,7 @@ class ActionSearchPricierThan(Action):
         price = tracker.get_slot("price")
 
         if not price:
-            dispatcher.utter_message(text="Please provide a price to search for")
+            dispatcher.utter_message(text="Please provide a price to search for.")
             return []
         
         matching_pets = [pet for pet in pets if pet["price"] >= int(price)]
@@ -166,7 +166,7 @@ class ActionSearchPricierThan(Action):
         if matching_pets:
             dispatcher.utter_message(text=f"Here's a list of pets that cost more than or exactly {price}€:", attachment=matching_pets)
         else:
-            dispatcher.utter_message(text=f"We have no pets that cost more than {price}€")
+            dispatcher.utter_message(text=f"We have no pets that cost more than {price}€.")
 
         return [SlotSet("price", None)]
 
@@ -196,7 +196,7 @@ class ActionSearchWithinPriceRange(Action):
             return [SlotSet("price_min", None), SlotSet("price_max", None)]
         
         if price_min > price_max:
-            dispatcher.utter_message(text="The minimum price must be less than the maximum price")
+            dispatcher.utter_message(text="The minimum price must be less than the maximum price.")
             return [SlotSet("price_min", None), SlotSet("price_max", None)]
         
         matching_pets = [pet for pet in pets if pet["price"] >= int(price_min) and pet["price"] <= int(price_max)]
@@ -204,7 +204,7 @@ class ActionSearchWithinPriceRange(Action):
         if matching_pets:
             dispatcher.utter_message(text=f"Here's a list of pets priced between {price_min}€ and {price_max}€:", attachment=matching_pets)
         else:
-            dispatcher.utter_message(text=f"We have no pets priced between {price_min}€ and {price_max}€")
+            dispatcher.utter_message(text=f"We have no pets priced between {price_min}€ and {price_max}€.")
 
         return [SlotSet("price_min", None), SlotSet("price_max", None)]
 
@@ -229,13 +229,13 @@ class ActionSearchByAge(Action):
         age = tracker.get_slot("age")
 
         if not age:
-            dispatcher.utter_message(text="Please provide an age to search for")
+            dispatcher.utter_message(text="Please provide an age to search for.")
             return [SlotSet("age", None)]
         
         valid_age_pattern = r"^^\d+(\.\d+)? (year|years|month|months)$"
 
         if not re.match(valid_age_pattern, age.lower()):
-            dispatcher.utter_message(text="Please provide the age in a format '[number] years' or '[number] months'")
+            dispatcher.utter_message(text="Please provide the age in a format '[number] years' or '[number] months'.")
             return [SlotSet("age", None)]
 
         matching_pets = [pet for pet in pets if pet["age"] == age.lower()]
@@ -266,7 +266,7 @@ class ActionSearchByOrigin(Action):
         origin = tracker.get_slot("origin")
 
         if not origin:
-            dispatcher.utter_message(text="Please provide an origin to search for")
+            dispatcher.utter_message(text="Please provide an origin to search for.")
 
         matching_pets = [pet for pet in pets if origin.lower() in pet["origin"].lower()]
 
@@ -296,7 +296,7 @@ class ActionSearchBySize(Action):
         size = tracker.get_slot("size")
 
         if not size:
-            dispatcher.utter_message(text="Please provide a size to search for")
+            dispatcher.utter_message(text="Please provide a size to search for.")
 
         matching_pets = [pet for pet in pets if size.lower() in pet["size"].lower()]
 
@@ -304,6 +304,79 @@ class ActionSearchBySize(Action):
             dispatcher.utter_message(text=f"Here's a list of {size}-sized pets:", attachment=matching_pets)
 
         return [SlotSet("size", None)]
+
+class ActionSearchByMultipleCriteria(Action):
+    def name(self) -> Text:
+        return "action_search_by_multiple_criteria"
+    
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # load product data from the JSON file
+        try:
+            pets = load_data()
+        except:
+            dispatcher.utter_message(text="There was an error loading the data. Please try again.")
+  
+        # get slots from search query
+        name = tracker.get_slot("name")
+        category = tracker.get_slot("category")
+        price_min = tracker.get_slot("price_min")
+        price_max = tracker.get_slot("price_max")
+        age = tracker.get_slot("age")
+        origin = tracker.get_slot("origin")
+        size = tracker.get_slot("size")
+
+        if name:
+            name_singular = name[:-1] if name.endswith("s") or name.endswith("es") else name
+
+            pets = [pet for pet in pets if name.lower() in pet["name"].lower()]
+
+        if category:
+            category_singular = category[:-1] if category.endswith("s") else category
+
+            pets = [pet for pet in pets if category_singular.lower() in pet["category"].lower()]
+
+        if price_min and price_max:
+            if price_min > price_max:
+                dispatcher.utter_message(text="The minimum price must be less than the maximum price.")
+                return [SlotSet("price_min", None), SlotSet("price_max", None)]
+            
+            pets = [pet for pet in pets if int(price_min) <= pet["price"] <= int(price_max)]
+
+        if age:
+            valid_age_pattern = r"^^\d+(\.\d+)? (year|years|month|months)$"
+            
+            if not re.match(valid_age_pattern, age.lower()):
+                dispatcher.utter_message(text="Please provide the age in a format '[number] years' or '[number] months'.")
+                return [SlotSet("age", None)]
+            
+            pets = [pet for pet in pets if age.lower() in pet["age"].lower()]
+
+        if origin:
+            pets = [pet for pet in pets if origin.lower() in pet["origin"].lower()]
+
+        if size:
+            pets = [pet for pet in pets if size.lower() in pet["size"].lower()]
+
+        if pets:
+            dispatcher.utter_message(text="Here's a list of pets that match your search criteria:", attachment=pets)
+        else:
+            dispatcher.utter_message(text="We have no pets that match your search criteria.")
+
+        return [
+            SlotSet("name", None),
+            SlotSet("category", None),
+            SlotSet("price", None),
+            SlotSet("price_min", None),
+            SlotSet("price_max", None),
+            SlotSet("age", None),
+            SlotSet("origin", None),
+            SlotSet("size", None)
+        ]
 
 # loads the data from JSON file
 def load_data():

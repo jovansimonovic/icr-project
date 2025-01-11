@@ -304,3 +304,46 @@ nlu:
     - show me pets that are [Large](size).
     - find pets that are [large](size).
     - do you have pets that are [large](size)?
+
+- intent: search_by_multiple_criteria
+  examples: |
+    - search for [dog](category) from [Germany](origin).
+    - show me [cat](category) from [United Kingdom](origin).
+    - find [bird](category) that costs between [100](price_min) and [300](price_max) euros.
+    - do you have any [small](size) [dog](category) from [Canada](origin)?
+    - search for [medium](size) pets under [200](price) euros.
+    - show me pets that are [1 year](age) old and cost less than [150](price) euros.
+    - find pets from [Australia](origin) that are [large](size).
+    - do you sell [rodent](category) from [Brazil](origin) under [50](price) euros?
+    - do you have [small](size) pets priced between [50](price_min) and [100](price_max) euros?
+    - show me [fish](category) from [Thailand](origin) that are [6 months](age) old.
+    - search for [bird](category) from [China](origin) costing more than [200](price) euros.
+    - find [large](size) pets from [United States](origin) priced between [300](price_min) and [500](price_max).
+    - show all [dog](category) from [Iran](origin) costing less than [250](price) euros.
+    - do you have [bird](category) that is [1 year](age) old and from [Germany](origin)?
+    - find [small](size) [cat](category) from [Scotland](origin) under [200](price) euros.
+    - search for [medium](size) [fish](category) priced between [50](price_min) and [300](price_max).
+    - do you have any [large](size) pets that are [2 years](age) old from [Peru](origin)?
+    - show me [rodent](category) from [Serbia](origin) costing between [100](price_min) and [400](price_max).
+    - find pets from [United Kingdom](origin) that are [small](size) and cost less than [150](price) euros.
+    - list pets that are [large](size) and cost between [250](price_min) and [500](price_max).
+    - "find a [Golden Retriever](name), a [large](size) [dog](category) from [Canada](origin) costing under [500](price) euros and [2 years](age) old."
+    - "search for a [Jenday Conure](name), a [small](size) [bird](category) from [Brazil](origin) priced under [200](price) euros and [1 year](age)."
+    - "list [small](size) [rodents](category) from [Peru](origin) under [50](price) euros and aged [6 months](age)."
+    - "do you have a [Maine Coon](name), a [large](size) [cat](category) from [United States](origin) costing [500](price) euros and [4 years](age) old?"
+    - "find [medium](size) [dogs](category) from [Serbia](origin) under [400](price) euros and [2 years](age)."
+    - "search for [Goldfish](name), a [small](size) [fish](category) from [China](origin) under [50](price) euros and [1 year](age)."
+    - "list [large](size) [dogs](category) from [Germany](origin) costing under [600](price) euros and aged [3 years](age)."
+    - "do you sell a [Scottish Fold](name), a [medium](size) [cat](category) from [Scotland](origin) priced under [500](price) euros and [2 years](age) old?"
+    - "find [medium](size) [dogs](category) from [United States](origin) under [500](price) euros and [2 years](age)."
+    - "search for [Cockatiel](name), a [small](size) [bird](category) from [Australia](origin) under [250](price) euros and [1.5 years](age)."
+    - "find a [Beagle](name), a [medium](size) [dog](category) from [United States](origin) costing less than [600](price) euros and aged [2 years](age)."
+    - "list all pets from [Thailand](origin) that are [medium](size), [2 years](age) old, and cost between [400](price_min) and [700](price_max)."
+    - "search for a [Cockatiel](name), a [small](size) [dog](category) from [China](origin) priced between [800](price_min) and [1200](price_max) euros and [3 years](age) old."
+    - "find [large](size) [birds](category) from [Iran](origin) costing under [500](price) euros."
+    - "search for [Guinea Pigs](name), a [small](size) [rodent](category) from [Peru](origin) priced under [50](price) euros and [1 year](age)."
+    - "list [German Shepherds](name) from [Germany](origin) costing between [1000](price_min) and [1500](price_max) euros and aged [4 years](age)."
+    - "show all [medium](size) [fish](category) from [Japan](origin) under [200](price) euros and [6 months](age)."
+    - "do you have a [Siamese](name), a [large](size) [cat](category) from [United States](origin) priced over [500](price) euros and [2.5 years](age) old?"
+    - "search for a [Goldfish](name), a [small](size) [insect](category) from [Venezuela](origin) under [100](price) euros and aged [8 months](age)."
+    - "do you sell a [small](size) [bird](category) from [Australia](origin) that is [3 years](age) old and costs between [50](price_min) and [150](price_max) euros?"
