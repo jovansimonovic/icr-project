@@ -347,3 +347,14 @@ nlu:
     - "do you have a [Siamese](name), a [large](size) [cat](category) from [United States](origin) priced over [500](price) euros and [2.5 years](age) old?"
     - "search for a [Goldfish](name), a [small](size) [insect](category) from [Venezuela](origin) under [100](price) euros and aged [8 months](age)."
     - "do you sell a [small](size) [bird](category) from [Australia](origin) that is [3 years](age) old and costs between [50](price_min) and [150](price_max) euros?"
+
+- intent: add_to_cart
+  examples: |
+    - add [Golden Retriever](name) to my cart.
+    - add [Jenday Conure](name) to my cart.
+    - add [Maine Coon](name) to cart.
+    - add [Scottish Fold](name) to cart.
+    - i want to add a [Cockatiel](name) to my cart.
+    - i want to add a [Beagle](name) to my cart.
+    - i want to add a [Siamese](name) to cart.
+    - i want to add a [Goldfish](name) to cart.

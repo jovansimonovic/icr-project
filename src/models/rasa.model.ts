@@ -5,4 +5,8 @@ export interface RasaModel {
   text: string | null;
   image: string | null;
   attachment: Product[] | null;
+  custom: {
+    actionType: string;
+    products: Product[];
+  } | null;
 }

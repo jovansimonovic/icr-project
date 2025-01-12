@@ -20,6 +20,7 @@ intents:
   - search_by_origin
   - search_by_size
   - search_by_multiple_criteria
+  - add_to_cart
 
 entities:
   - name
@@ -86,6 +87,7 @@ actions:
   - action_search_by_origin
   - action_search_by_size
   - action_search_by_multiple_criteria
+  - action_add_to_cart
 
 responses:
   utter_greet:

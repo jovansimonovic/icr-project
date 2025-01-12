@@ -305,6 +305,7 @@ class ActionSearchBySize(Action):
 
         return [SlotSet("size", None)]
 
+# shows the products that match multiple criteria
 class ActionSearchByMultipleCriteria(Action):
     def name(self) -> Text:
         return "action_search_by_multiple_criteria"
@@ -378,17 +379,49 @@ class ActionSearchByMultipleCriteria(Action):
             SlotSet("size", None)
         ]
 
+class ActionAddToCart(Action):
+    def name(self) -> Text:
+        return "action_add_to_cart"
+    
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # load product data from the JSON file
+        try:
+            pets = load_data();
+        except:
+            dispatcher.utter_message(text="There was an error loading the data. Please try again.")
+  
+        # get name from search query
+        name = tracker.get_slot("name")
+
+        if not name:
+            dispatcher.utter_message(text="Please provide a name to search for.")
+            return []
+        
+        # remove the trailing "s" or "es" from the name (if applicable)
+        name_singular = name[:-1] if name.endswith("s") or name.endswith("es") else name
+
+        matching_pets = [pet for pet in pets if name_singular.lower() in pet["name"].lower()]
+
+        if matching_pets:
+            dispatcher.utter_message(
+                text=f"Added {name_singular} to cart.",
+                # attachment=matching_pets,
+                json_message={
+                    "actionType": "add_to_cart",
+                    "products": matching_pets},
+                )
+        else:
+            dispatcher.utter_message(text="We could not find a pet with that name.")
+
+        return [SlotSet("name", None)]
+
 # loads the data from JSON file
 def load_data():
       products_file = Path("data/products.json")
       products = json.loads(products_file.read_text())
       return products
-
-# generates an attachment message
-def generate_attachment(products, dispatcher, message):
-      data = products
-      if (isinstance(products, list) and len(products)>0):
-            dispatcher.utter_message(text=message, attachment=products)
-            return[]
-      
-      dispatcher.utter_message(text="We failed to find any pets")

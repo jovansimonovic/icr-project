@@ -80,3 +80,8 @@ stories:
   steps:
   - intent: search_by_multiple_criteria
   - action: action_search_by_multiple_criteria
+
+- story: add a product to cart
+  steps:
+  - intent: add_to_cart
+  - action: action_add_to_cart

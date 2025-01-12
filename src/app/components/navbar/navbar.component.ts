@@ -5,7 +5,6 @@ import { MessageModel } from '../../../models/message.model';
 import { ChatbotService } from '../../../services/chatbot.service';
 import { RasaModel } from '../../../models/rasa.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-navbar',
@@ -29,8 +28,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private userService: UserService,
     private cartService: CartService,
-    private chatbotService: ChatbotService,
-    private sanitizer: DomSanitizer
+    private chatbotService: ChatbotService
   ) {}
 
   ngOnInit(): void {
@@ -122,6 +120,13 @@ export class NavbarComponent implements OnInit {
                 return `<img src="${message.image}" width=200 />`;
               }
 
+              if (message.custom?.actionType === 'add_to_cart') {
+                message.custom?.products.forEach((product) => {
+                  this.cartService.addToCart(product);
+                });
+                return null;
+              }
+
               if (message.attachment) {
                 let html = '';
 
@@ -167,6 +172,7 @@ export class NavbarComponent implements OnInit {
               }
               return message.text;
             })
+            .filter((message) => message !== null)
             .forEach((message) => {
               this.pushMessage({ type: 'bot', text: message! });
             });
