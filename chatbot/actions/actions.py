@@ -334,7 +334,7 @@ class ActionSearchByMultipleCriteria(Action):
         if name:
             name_singular = name[:-1] if name.endswith("s") or name.endswith("es") else name
 
-            pets = [pet for pet in pets if name.lower() in pet["name"].lower()]
+            pets = [pet for pet in pets if name_singular.lower() in pet["name"].lower()]
 
         if category:
             category_singular = category[:-1] if category.endswith("s") else category
@@ -379,6 +379,7 @@ class ActionSearchByMultipleCriteria(Action):
             SlotSet("size", None)
         ]
 
+# adds a product to the cart
 class ActionAddToCart(Action):
     def name(self) -> Text:
         return "action_add_to_cart"
